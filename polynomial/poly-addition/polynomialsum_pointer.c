@@ -42,10 +42,10 @@ void polySum(poly *p1, poly *p2, int n1, int n2)
 	
 	while (i < n1 && j < n2 )
 	{
-		//printf("I = %d\nJ = %d\nK = %d\n", i, j, k);
+		
 		if (((p1 + i) -> expo) > ((p2 + j) -> expo))
 		{
-			//printf("####FLAG###1\n");
+
 			(result + k) -> coeff = (p1 + i) -> coeff;
 			(result + k) -> expo = (p1 + i) -> expo;
 			i++;
@@ -54,7 +54,7 @@ void polySum(poly *p1, poly *p2, int n1, int n2)
 		
 		else if (((p2 + j) -> expo) > ((p1 + i) -> expo))
 		{
-			//printf("####FLAG###2\n");
+
 			(result + k) -> coeff = (p2 + j) -> coeff;
 			(result + k) -> expo = (p2 + j) -> expo;
 			j++;
@@ -63,7 +63,7 @@ void polySum(poly *p1, poly *p2, int n1, int n2)
 		
 		else if (((p1 + i) -> expo) == ((p2 + j) -> expo))
 		{
-			//printf("####FLAG###3\n");
+
 			(result + k) -> coeff = (((p1 + i) -> coeff) + ((p2 + j) -> coeff));
 			(result + k) -> expo = (p1 + i) -> expo;
 			i++;
@@ -72,7 +72,6 @@ void polySum(poly *p1, poly *p2, int n1, int n2)
 		}
 	}
 	
-	//printf("####FLAG###4\n");
 	while (i < n1)
 	{
 		
@@ -90,7 +89,7 @@ void polySum(poly *p1, poly *p2, int n1, int n2)
 		j++;
 		k++;
 	}
-	//printf("####FLAG###5\n");
+
 	printf("First Polynomial: \n");
 	polyDisplay(p1, n1);
 	printf("Second Polynomial: \n");

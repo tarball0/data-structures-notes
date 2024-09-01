@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // struct as a user-defined datatype using typedef
-typedef struct matrix{
+typedef struct{
 	int mat[32][32];
 	int r;
 	int c;
@@ -82,7 +82,7 @@ void def(matrix *a){
 	for(int i = 0; i < (*a).r; i++){
 		for(int j = 0; j < (*a).c; j++){
 			printf("enter value (%d,%d): ", i, j);
-			scanf("%d", &((*a).mat[i][j]));
+			scanf("%d", &(a->mat[i][j]));
 		}
 	}
 }

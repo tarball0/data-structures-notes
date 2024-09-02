@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <strings.h>
+
 #define SIZE 8
 
 typedef struct {

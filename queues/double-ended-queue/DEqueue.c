@@ -98,7 +98,7 @@ void inject(int item) {
         for (int i = front; i <= rear; i++) {
             queue[i - 1] = queue[i];
         }
-        queue[front] = item;
+        queue[rear] = item;
         front--;
     }
 }

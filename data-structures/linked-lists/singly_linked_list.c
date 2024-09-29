@@ -9,16 +9,6 @@ typedef struct node {
 
 node *head = NULL;
 
-/* 							CHANGES:
- * changed some int functions to void functions since there weren't
- * return statements in all control paths, which could cause undefined behaviour.
- * return would still work with void though.
- *
- * menu outside the for-loop (you only need to see the menu once mf)
- *
- * also turned it into top down cause it's neater, :)))))
- */
-
 node *createNode();
 void searchElement();
 void insertElement();

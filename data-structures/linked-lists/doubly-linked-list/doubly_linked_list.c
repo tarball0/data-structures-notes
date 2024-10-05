@@ -43,9 +43,8 @@ void displayList(){
 
     printf("\nElements: ");
 
-    printf("%d ", head -> data);
-
-    temp = temp -> Rlink;
+//    printf("%d ", head -> data);			// why?
+//    temp = temp -> Rlink;
 
     while (temp != NULL){
         

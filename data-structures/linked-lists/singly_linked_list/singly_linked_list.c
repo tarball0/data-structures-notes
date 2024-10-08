@@ -238,7 +238,16 @@ void deleteElement() {
     scanf("%d", &elem);
 
     while (temp->next != NULL) {
-
+        
+        if (temp == head && temp->data == elem) 
+        {
+            head = temp->next;
+            printf("\nDeleted Element: %d", temp->data);
+            flag++;
+            free(temp);
+            return;
+        }
+        
         if (temp->data == elem) {
 
             flag++;

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <time.h>			// where is this even used
 
 typedef struct Node{
 
@@ -42,9 +41,6 @@ void displayList(){
     Node* temp = head;
 
     printf("\nElements: ");
-
-//    printf("%d ", head -> data);			// why?
-//    temp = temp -> Rlink;
 
     while (temp != NULL){
         

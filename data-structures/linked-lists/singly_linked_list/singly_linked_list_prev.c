@@ -35,7 +35,7 @@ int main() {
 	printf("\n9.Exit");
 
     while (choice != 9) {
-        printf("\n\nEnter choice: ");
+        printf("\nEnter choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -209,46 +209,29 @@ void deleteEnd() {
 void deleteElement() {
 
     node *temp = head;
-    node *ptr;
+    node *ptr = NULL;
     int elem, flag = 0;
 
     if (head == NULL)
         return;
 
-    else if (head->next == NULL) {
-
-        printf("\nEnter element to be deleted: ");
-        scanf("%d", &elem);
-
-        if (head->data == elem) {
-
-            temp = head;
-            head = NULL;
-            printf("\nDeleted Element: %d", temp->data);
-            free(temp);
-            return;
-        }
-
-        else
-            printf("\nElement not found");
-        return;
-    }
-
     printf("\nEnter element to be deleted: ");
     scanf("%d", &elem);
 
-    while (temp->next != NULL) {
+    if (head->data == elem) {
 
-        if (temp->data == elem) {
+        printf("\nDeleted Element: %d", temp->data);
+        deleteFront();
+        return;
+    }
 
-            flag++;
-            break;
-        }
+    while (temp->next != NULL && temp->data != elem) {
+
         ptr = temp;
         temp = temp->next;
     }
 
-    if (flag != 0 || temp->data == elem) {
+    if (temp->data == elem) {
 
         ptr->next = temp->next;
         printf("\nDeleted Element: %d", temp->data);
@@ -261,6 +244,12 @@ void deleteElement() {
 
 void searchElement() {
 
+    if (head == NULL){
+        
+        printf("\nList is Empty\n");
+        return;
+    }
+    
     node *temp = head;
     int elem, loc = 1, flag = 0;
 

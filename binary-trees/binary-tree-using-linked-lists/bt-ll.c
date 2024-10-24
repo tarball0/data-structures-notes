@@ -1,3 +1,5 @@
+// credit: Abdul Ali sir :)
+
 #include <stdio.h>
 #include <stdlib.h>
 

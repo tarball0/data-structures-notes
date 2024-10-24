@@ -1,3 +1,5 @@
+// credit: Abdul Ali sir :)
+
 #include <stdio.h>
 
 int a[15], i, item, key, ch, loc = 0;

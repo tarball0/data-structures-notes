@@ -161,9 +161,9 @@ void deleteSpecific() {
             free(head);
             head = NULL;
         } else {
-            head->Rlink->Llink = NULL;
             temp = head;
             head = head->Rlink;
+			head->Llink = NULL;
             free(temp);
         }
     } else {

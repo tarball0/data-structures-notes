@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 typedef struct Node {
-
     struct Node *Llink;
     int data;
     struct Node *Rlink;
@@ -11,17 +10,11 @@ typedef struct Node {
 Node *head = NULL;
 
 Node *createNode() {
-
     Node *node = malloc(sizeof(Node));
-
     if (node == NULL) {
-
         printf("Node creation failed");
         return NULL;
-    }
-
-    else {
-
+    } else {
         printf("Enter Element: ");
         scanf("%d", &(node->data));
         node->Llink = node->Rlink = NULL;
@@ -31,7 +24,6 @@ Node *createNode() {
 }
 
 void displayList() {
-
     if (head == NULL) {
         printf("List is Empty");
         return;
@@ -40,9 +32,7 @@ void displayList() {
     Node *temp = head;
 
     printf("\nElements: ");
-
     while (temp != NULL) {
-
         printf("%d ", temp->data);
         temp = temp->Rlink;
     }
@@ -50,16 +40,11 @@ void displayList() {
 }
 
 void insertFront() {
-
     Node *new = createNode();
 
     if (head == NULL) {
-
         head = new;
-    }
-
-    else {
-
+    } else {
         head->Llink = new;
         new->Rlink = head;
         head = new;
@@ -67,83 +52,59 @@ void insertFront() {
 }
 
 void insertEnd() {
-
     Node *new = createNode();
 
     if (head == NULL) {
-
         head = new;
-    }
-
-    else {
-
+    } else {
         Node *temp = head;
-        while (temp->Rlink != NULL) {
 
+        while (temp->Rlink != NULL) {
             temp = temp->Rlink;
         }
-
         new->Llink = temp;
         temp->Rlink = new;
     }
 }
 
 void insertSpecific() {
-
     if (head == NULL) {
         return;
     }
 
     int key, flag = 0;
-
     printf("Enter element after which new data is to be inserted: ");
     scanf("%d", &key);
-
     Node *new = createNode();
 
     if (head->data == key) {
-
         if (head->Rlink == NULL) {
-
             new->Llink = head;
             head->Rlink = new;
-        }
-
-        else {
-
+        } else {
             new->Rlink = head->Rlink;
             new->Llink = head;
             head->Rlink = new;
         }
 
         flag = 1;
-    }
-
-    else {
-
+    } else {
         Node *temp = head;
 
         while (temp->data != key && temp->Rlink != NULL) {
-
             temp = temp->Rlink;
         }
 
         if (temp->data == key) {
-
             if (temp->Rlink != NULL) {
-
                 temp->Rlink->Llink = new;
                 new->Rlink = temp->Rlink;
                 new->Llink = temp;
                 temp->Rlink = new;
-            }
-
-            else {
-
+            } else {
                 temp->Rlink = new;
                 new->Llink = temp;
             }
-
             flag = 1;
         }
     }
@@ -154,7 +115,7 @@ void deleteFront() {
         return;
     } else if (head->Rlink == NULL) {
         free(head);
-		head = NULL;
+        head = NULL;
     } else {
 
         Node *temp = head;
@@ -165,28 +126,18 @@ void deleteFront() {
 }
 
 void deleteEnd() {
-
     if (head == NULL) {
-
         return;
-    }
-
-    else {
-
+    } else {
         Node *temp = head;
 
         while (temp->Rlink != NULL) {
-
             temp = temp->Rlink;
         }
 
         if (temp->Llink == NULL) {
-
             head = NULL;
-        }
-
-        else {
-
+        } else {
             temp->Llink->Rlink = NULL;
         }
 
@@ -195,9 +146,7 @@ void deleteEnd() {
 }
 
 void deleteSpecific() {
-
     if (head == NULL) {
-
         return;
     }
 
@@ -208,84 +157,54 @@ void deleteSpecific() {
     scanf("%d", &key);
 
     if (head->data == key) {
-
         if (head->Rlink == NULL) {
-
             free(head);
             head = NULL;
-        }
-
-        else {
-
+        } else {
             head->Rlink->Llink = NULL;
             temp = head;
             head = head->Rlink;
             free(temp);
         }
-
-    }
-
-    else {
-
+    } else {
         temp = head;
 
         while (temp->data != key && temp->Rlink != NULL) {
-
             temp = temp->Rlink;
         }
 
         if (temp->data == key) {
-
             if (temp->Rlink == NULL) {
-
                 temp->Llink->Rlink = NULL;
-            }
-
-            else {
-
+            } else {
                 temp->Rlink->Llink = temp->Llink;
                 temp->Llink->Rlink = temp->Rlink;
             }
-
             free(temp);
-        }
-
-        else {
-
+        } else {
             printf("Specified element is absent from the List");
         }
     }
 }
 
 void searchElement() {
-
     if (head == NULL) {
-
         printf("List has no Elements");
         return;
-    }
-
-    else {
-
+    } else {
         Node *temp = head;
         int key, i = 0;
-
         printf("Enter element to be searched: ");
         scanf("%d", &key);
 
         while (temp->data != key && temp->Rlink != NULL) {
-
             temp = temp->Rlink;
             i++;
         }
 
         if (temp->data == key) {
-
             printf("Element found at position %d", i + 1);
-        }
-
-        else {
-
+        } else {
             printf("Element not found");
         }
     }
@@ -311,7 +230,6 @@ int main() {
         scanf("%d", &choice);
 
         switch (choice) {
-
         case 1:
             insertFront();
             displayList();

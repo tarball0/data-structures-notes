@@ -1,104 +1,96 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <time.h>			// where is this even used
 
-typedef struct Node{
+typedef struct Node {
 
-    struct Node* Llink;
+    struct Node *Llink;
     int data;
-    struct Node* Rlink;
+    struct Node *Rlink;
 } Node;
 
-Node* head = NULL;
+Node *head = NULL;
 
-Node* createNode(){
+Node *createNode() {
 
-    Node* node = malloc(sizeof(Node));
+    Node *node = malloc(sizeof(Node));
 
-    if (node == NULL){
+    if (node == NULL) {
 
         printf("Node creation failed");
-		return NULL;
+        return NULL;
     }
 
-    else{
+    else {
 
         printf("Enter Element: ");
-        scanf("%d", &(node -> data));
-        node -> Llink = node -> Rlink = NULL;
+        scanf("%d", &(node->data));
+        node->Llink = node->Rlink = NULL;
 
         return node;
     }
 }
 
-void displayList(){
+void displayList() {
 
-    if (head == NULL){
-
+    if (head == NULL) {
         printf("List is Empty");
         return;
     }
 
-    Node* temp = head;
+    Node *temp = head;
 
     printf("\nElements: ");
 
-//    printf("%d ", head -> data);			// why?
-//    temp = temp -> Rlink;
+    while (temp != NULL) {
 
-    while (temp != NULL){
-        
-        printf("%d ", temp -> data);
-        temp = temp -> Rlink;
+        printf("%d ", temp->data);
+        temp = temp->Rlink;
     }
     return;
 }
 
-void insertFront(){
+void insertFront() {
 
-    Node* new = createNode();
+    Node *new = createNode();
 
-    if (head == NULL){
-
-        head = new;
-    }
-
-    else{
-        
-        head -> Llink = new;
-        new -> Rlink = head;
-        head = new;
-    }
-    
-}
-
-void insertEnd(){
-
-    Node* new = createNode();
-
-    if (head == NULL){
+    if (head == NULL) {
 
         head = new;
     }
 
-    else{
-        
-       Node* temp = head;
-       while (temp -> Rlink != NULL){
+    else {
 
-            temp = temp -> Rlink;
-       }
-        
-       new -> Llink = temp;
-       temp -> Rlink = new;
+        head->Llink = new;
+        new->Rlink = head;
+        head = new;
     }
 }
 
-void insertSpecific(){
+void insertEnd() {
 
-    if (head == NULL){
+    Node *new = createNode();
 
-        //printf("List has no Elements");
+    if (head == NULL) {
+
+        head = new;
+    }
+
+    else {
+
+        Node *temp = head;
+        while (temp->Rlink != NULL) {
+
+            temp = temp->Rlink;
+        }
+
+        new->Llink = temp;
+        temp->Rlink = new;
+    }
+}
+
+void insertSpecific() {
+
+    if (head == NULL) {
         return;
     }
 
@@ -107,49 +99,49 @@ void insertSpecific(){
     printf("Enter element after which new data is to be inserted: ");
     scanf("%d", &key);
 
-    Node* new = createNode();
+    Node *new = createNode();
 
-    if (head -> data == key){
+    if (head->data == key) {
 
-        if (head -> Rlink == NULL){
+        if (head->Rlink == NULL) {
 
-            new -> Llink = head;
-            head -> Rlink = new;
+            new->Llink = head;
+            head->Rlink = new;
         }
 
-        else{
+        else {
 
-            new -> Rlink = head -> Rlink;
-            new -> Llink = head;
-            head -> Rlink = new;
+            new->Rlink = head->Rlink;
+            new->Llink = head;
+            head->Rlink = new;
         }
 
         flag = 1;
     }
 
-    else{
+    else {
 
-        Node* temp = head;
+        Node *temp = head;
 
-        while (temp -> data != key && temp -> Rlink != NULL){
+        while (temp->data != key && temp->Rlink != NULL) {
 
-            temp = temp -> Rlink;
+            temp = temp->Rlink;
         }
 
-        if (temp -> data == key){
+        if (temp->data == key) {
 
-            if (temp -> Rlink != NULL){
+            if (temp->Rlink != NULL) {
 
-                temp -> Rlink -> Llink = new;
-                new -> Rlink = temp -> Rlink;
-                new -> Llink = temp;
-                temp -> Rlink = new;
+                temp->Rlink->Llink = new;
+                new->Rlink = temp->Rlink;
+                new->Llink = temp;
+                temp->Rlink = new;
             }
 
-            else{
+            else {
 
-                temp -> Rlink = new;
-                new -> Llink = temp;
+                temp->Rlink = new;
+                new->Llink = temp;
             }
 
             flag = 1;
@@ -157,176 +149,170 @@ void insertSpecific(){
     }
 }
 
-void deleteFront(){
+void deleteFront() {
 
-    if (head == NULL){
+    if (head == NULL) {
 
-        //printf("List has no Elements");
         return;
     }
 
-    else{
-        
-        Node* temp;
-        temp = head;
-        
-        if (head -> Rlink != NULL){
+    else {
 
-            head -> Rlink -> Llink = NULL;
+        Node *temp;
+        temp = head;
+
+        if (head->Rlink != NULL) {
+
+            head->Rlink->Llink = NULL;
         }
 
-        head = head -> Rlink;
+        head = head->Rlink;
 
         free(temp);
     }
 }
 
-void deleteEnd(){
+void deleteEnd() {
 
-    if (head == NULL){
+    if (head == NULL) {
 
-        //printf("List has no Elements");
         return;
     }
-    
-    else{
 
-        Node* temp = head;
-        
-        while (temp -> Rlink != NULL){
-            
-            temp = temp -> Rlink;
+    else {
+
+        Node *temp = head;
+
+        while (temp->Rlink != NULL) {
+
+            temp = temp->Rlink;
         }
-        
-        if (temp -> Llink == NULL){
+
+        if (temp->Llink == NULL) {
 
             head = NULL;
         }
 
-        else{
+        else {
 
-            temp -> Llink -> Rlink = NULL;
+            temp->Llink->Rlink = NULL;
         }
-        
+
         free(temp);
     }
 }
 
-void deleteSpecific(){
+void deleteSpecific() {
 
-    if (head == NULL){
+    if (head == NULL) {
 
-        //printf("List has no Elements");
         return;
     }
 
-    Node* temp;
+    Node *temp;
     int key;
-    
+
     printf("Enter element to be deleted: ");
     scanf("%d", &key);
 
-    if (head -> data == key){
+    if (head->data == key) {
 
-        if (head -> Rlink == NULL)
-        {
-            
+        if (head->Rlink == NULL) {
+
             free(head);
             head = NULL;
         }
 
-        else{
+        else {
 
-            head -> Rlink -> Llink = NULL;
+            head->Rlink->Llink = NULL;
             temp = head;
-            head = head -> Rlink;
+            head = head->Rlink;
             free(temp);
         }
-        
+
     }
 
-    else{
+    else {
 
         temp = head;
 
-        while (temp -> data != key && temp -> Rlink != NULL){
+        while (temp->data != key && temp->Rlink != NULL) {
 
-            temp = temp -> Rlink;
+            temp = temp->Rlink;
         }
 
-        if (temp -> data == key){
+        if (temp->data == key) {
 
-            if (temp -> Rlink == NULL){
-                
-                temp -> Llink -> Rlink = NULL;
+            if (temp->Rlink == NULL) {
+
+                temp->Llink->Rlink = NULL;
             }
-            
-            else{
 
-                temp -> Rlink -> Llink = temp -> Llink;
-                temp -> Llink -> Rlink = temp -> Rlink;
+            else {
+
+                temp->Rlink->Llink = temp->Llink;
+                temp->Llink->Rlink = temp->Rlink;
             }
 
             free(temp);
         }
 
-        else{
+        else {
 
             printf("Specified element is absent from the List");
         }
-
     }
 }
 
-void searchElement(){
+void searchElement() {
 
-    if (head == NULL){
+    if (head == NULL) {
 
         printf("List has no Elements");
         return;
     }
 
-    else{
+    else {
 
-        Node* temp = head;
+        Node *temp = head;
         int key, i = 0;
 
         printf("Enter element to be searched: ");
         scanf("%d", &key);
-        
-        while (temp -> data != key && temp -> Rlink != NULL){
 
-            temp = temp -> Rlink;
+        while (temp->data != key && temp->Rlink != NULL) {
+
+            temp = temp->Rlink;
             i++;
         }
 
-        if (temp -> data == key){
-        
+        if (temp->data == key) {
+
             printf("Element found at position %d", i + 1);
         }
 
-        else{
+        else {
 
             printf("Element not found");
         }
     }
 }
 
-int main(){
-
+int main() {
 
     int choice;
 
     printf("\n#### MENU ####\n");
-	printf("\n1.Insert at Front");
-	printf("\n2.Insert at End");
-	printf("\n3.Insert after Element");
-	printf("\n4.Delete from Front");
-	printf("\n5.Delete from End");
-	printf("\n6.Delete Specific Element");
-	printf("\n7.Search Element");
-	printf("\n8.Display Elements");
-	printf("\n9.Exit");
+    printf("\n1.Insert at Front");
+    printf("\n2.Insert at End");
+    printf("\n3.Insert after Element");
+    printf("\n4.Delete from Front");
+    printf("\n5.Delete from End");
+    printf("\n6.Delete Specific Element");
+    printf("\n7.Search Element");
+    printf("\n8.Display Elements");
+    printf("\n9.Exit");
 
     while (choice != 9) {
         printf("\n\nEnter choice: ");
@@ -376,6 +362,6 @@ int main(){
             break;
         }
     }
-    
+
     return 0;
 }

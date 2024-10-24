@@ -150,24 +150,16 @@ void insertSpecific() {
 }
 
 void deleteFront() {
-
     if (head == NULL) {
-
         return;
-    }
+    } else if (head->Rlink == NULL) {
+        free(head);
+		head = NULL;
+    } else {
 
-    else {
-
-        Node *temp;
-        temp = head;
-
-        if (head->Rlink != NULL) {
-
-            head->Rlink->Llink = NULL;
-        }
-
+        Node *temp = head;
         head = head->Rlink;
-
+        head->Llink = NULL;
         free(temp);
     }
 }

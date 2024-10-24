@@ -211,7 +211,6 @@ void searchElement() {
 }
 
 int main() {
-
     int choice;
 
     printf("\n#### MENU ####\n");
@@ -272,6 +271,5 @@ int main() {
             break;
         }
     }
-
     return 0;
 }

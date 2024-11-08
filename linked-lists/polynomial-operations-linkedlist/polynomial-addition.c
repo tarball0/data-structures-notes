@@ -100,13 +100,10 @@ node *input() {
 			tail = tail->next;
         } else {
         	node *tmp = head;
-			while (tmp != NULL) {
+			while (tmp->next != NULL) {
 				if (tmp->next->expo < exp) {
 					new->next = tmp->next;
 					tmp->next = new;
-					break;
-				} else if (tmp->expo == exp) {
-					tmp->expo += exp;
 					break;
 				}
 				tmp = tmp->next;

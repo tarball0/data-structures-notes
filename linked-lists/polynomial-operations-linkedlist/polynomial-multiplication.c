@@ -12,7 +12,7 @@ node *input();
 node *createnode(int, int);
 void insert(node **, node **, node **);
 void display(node *);
-node *add(node *, node *);
+node *multiply(node *, node *);
 
 int main() {
     printf("enter polynomial 1: \n");
@@ -30,43 +30,46 @@ int main() {
     display(p1);
     printf("polynomial 2: ");
     display(p2);
-    node *p3 = add(p1, p2);
-	printf("sum: ");
+    node *p3 = multiply(p1, p2);
+	printf("product: ");
 	display(p3);
     return 0;
 }
 
-node *add(node *p1, node *p2) {
+node *multiply(node *p1, node *p2) {
     node *t1 = p1;
     node *t2 = p2;
     node *headr = NULL, *tailr = NULL;
 	node *new;
-
-    while (t1 != NULL && t2 != NULL) {
-        if (t1->expo == t2->expo) {
-            new = createnode((t1->coeff + t2->coeff), t1->expo);
-			t1 = t1->next;
-			t2 = t2->next;
-        } else if (t1->expo > t2->expo) {
-            new = createnode(t1->coeff, t1->expo);
-			t1 = t1->next;
-        } else if (t2->expo > t1->expo) {
-            new = createnode(t2->coeff, t2->expo);
-			t2 = t2->next;
-        }
-		insert(&headr, &tailr, &new);
-    }
-
 	while (t1 != NULL) {
-		new = createnode(t1->coeff , t1->expo);
-		insert(&headr, &tailr, &new);
+		while (t2 != NULL) {
+			node *new = createnode((t1->coeff * t2->coeff), (t1->expo + t2->expo));
+			insert(&headr, &tailr, &new);
+			t2 = t2->next;
+			printf(".\n");
+		}
 		t1 = t1->next;
+		t2 = p2;
+		printf("-\n");
 	}
-
-	while (t2 != NULL) {
-		new = createnode(t2->coeff, t2->expo);
-		insert(&headr, &tailr, &new);
-		t2 = t2->next;
+	printf("intermediate: ");
+	display(headr);
+	node *temp1 = headr;
+	while (temp1 != NULL) {
+		node *temp2 = temp1->next;	
+		node *prev = temp1;
+		while (temp2 != NULL) {
+			if (temp1->expo == temp2->expo) {
+				temp1->coeff += temp2->coeff;
+				prev->next = temp2->next;
+				free(temp2);
+				temp2 = prev->next;
+			} else {
+				prev = temp2;
+				temp2 = temp2->next;
+			}
+		}
+		temp1 = temp1->next;
 	}
 	return headr;
 }
@@ -125,7 +128,7 @@ void insert(node **head, node **tail, node **new) {
 void display(node *head) {
     node *temp = head;
     while (temp != NULL) {
-        printf("%dx^%d ", temp->coeff, temp->expo);
+        printf("%d^%d ", temp->coeff, temp->expo);
 		if (temp->next != NULL) {
 			printf("+ ");
 		}

@@ -102,7 +102,7 @@ int main() {
   if (loc == 0)
     printf("\nkey not found at index %d....", loc);
   else
-    printf("\nkey found....");
+    printf("\nkey found at index %d....", loc);
 
   insert();
   display();

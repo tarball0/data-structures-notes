@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define SIZE 8
+#define SIZE 4
 
 typedef struct {
     int val;
@@ -13,14 +13,13 @@ int front = -1, rear = -1;
 void enqueue(int, int);
 void dequeue();
 void display();
-int highpri();
 
 int main() {
     int opt, value, priority, loop = 1;
-		printf("MENU\n1. enqueue\n2. dequeue\n3. exit\n ");
+    printf("MENU\n1. enqueue\n2. dequeue\n3. exit\n ");
     while (loop) {
-		printf("option: ");
-		scanf("%d", &opt);
+        printf("option: ");
+        scanf("%d", &opt);
         switch (opt) {
         case 1:
             printf("enter value: ");
@@ -44,6 +43,7 @@ int main() {
 }
 
 void enqueue(int item, int priority) {
+	int pos = 0;
     if (front == 0 && rear == SIZE - 1) {
         printf("queue is full\n");
     }
@@ -55,54 +55,43 @@ void enqueue(int item, int priority) {
         queue[rear].pri = priority;
     }
 
-    else if (rear == SIZE - 1) {
-        for (int i = front; i <= rear; i++) {
-            queue[i - 1].val = queue[i].val;
-            queue[i - 1].pri = queue[i].pri;
-        }
-        front--;
-
-        queue[rear].val = item;
-        queue[rear].pri = priority;
-    }
-
     else {
-        rear++;
-        queue[rear].val = item;
-        queue[rear].pri = priority;
+        if (rear == SIZE - 1) {
+            for (int i = front; i <= rear; i++) {
+                queue[i - 1].val = queue[i].val;
+                queue[i - 1].pri = queue[i].pri;
+            }
+            front--;
+			rear--;
+        }
+
+		for (pos = front; pos <= rear; pos++) {
+			if (queue[pos].pri < priority) {
+				break;
+			}
+		}
+
+		for (int i = rear; i >= pos; i--) {
+			queue[i+1].val = queue[i].val;
+			queue[i+1].pri = queue[i].pri;
+		}
+		rear++;
+
+		queue[pos].val = item;
+		queue[pos].pri = priority;
+
     }
 }
 
 void dequeue() {
     if (rear == -1 && front == -1) {
         printf("queue is empty\n");
-    }
-
-    else if (rear == front) {
+    } else if (rear == front) {
         front = -1;
         rear = -1;
+    } else {
+        front++;
     }
-
-    else {
-        int hipri = highpri();
-		printf("dequeued %d\n", queue[hipri].val); 
-        for (int i = hipri; i <= rear; i++) {
-            queue[i].val = queue[i + 1].val;
-            queue[i].pri = queue[i + 1].pri;
-        }
-		rear--;
-    }
-}
-
-int highpri() {
-    int high = 0, index = -1;
-    for (int i = front; i <= rear; i++) {
-        if (queue[i].pri >= high) {
-            high = queue[i].pri;
-            index = i;
-        }
-    }
-    return index;
 }
 
 void display() {
@@ -111,13 +100,13 @@ void display() {
     }
 
     else {
-		printf("[");
+        printf("[");
         for (int i = front; i <= rear; i++) {
             printf("(%d,%d)", queue[i].val, queue[i].pri);
             if (i != rear) {
                 printf(", ");
             }
         }
-		printf("]\n");
+        printf("]\n");
     }
 }

@@ -17,13 +17,14 @@ void deletefront();
 void deleteend();
 void delete(int);
 void display();
+void reverse();
 
 int main() {
     int opt, exit = 0, element;
     printf("MENU:\n1. insert at front\n2. insert at end\n3. insert after "
            "element\n");
     printf("4. delete from front\n5. delete from end\n6. delete element\n7. "
-           "exit\n");
+           "reverse\n8. exit\n");
     while (!exit) {
         printf("enter option: ");
         scanf("%d", &opt);
@@ -56,7 +57,11 @@ int main() {
             delete (element);
 			display();
             break;
-        case 7:
+		case 7:
+			reverse();
+			display();
+			break;
+        case 8:
             exit = 1;
             break;
         default:
@@ -166,6 +171,19 @@ void delete(int item) {
             free(ptr);
         }
     }
+}
+
+void reverse() {
+	node *prev = NULL;
+	node *current = head;
+	node *next = NULL;
+	while (current != NULL) {
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	head = prev;
 }
 
 void display() {

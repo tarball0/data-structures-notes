@@ -1,5 +1,5 @@
 /* This program uses the unordered array method
- * which means that insertion is done randomly
+ * which means that insertion is done as usual
  * but deletion is done according to priority
  */
 

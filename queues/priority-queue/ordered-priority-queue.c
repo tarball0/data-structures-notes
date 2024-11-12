@@ -1,3 +1,8 @@
+/* This program uses the ordered array method
+ * which means that insertion is done according to priority
+ * but deletion is done as usual
+ */
+
 #include <stdio.h>
 
 #define SIZE 4

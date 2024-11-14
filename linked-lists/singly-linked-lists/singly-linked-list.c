@@ -18,13 +18,14 @@ void deleteend();
 void delete(int);
 void display();
 void reverse();
+void sort();
 
 int main() {
     int opt, exit = 0, element;
     printf("MENU:\n1. insert at front\n2. insert at end\n3. insert after "
            "element\n");
     printf("4. delete from front\n5. delete from end\n6. delete element\n7. "
-           "reverse\n8. exit\n");
+           "reverse\n8. sort\n9. exit\n");
     while (!exit) {
         printf("enter option: ");
         scanf("%d", &opt);
@@ -61,7 +62,11 @@ int main() {
 			reverse();
 			display();
 			break;
-        case 8:
+		case 8:
+			sort();
+			display();
+			break;
+        case 9:
             exit = 1;
             break;
         default:
@@ -186,15 +191,44 @@ void reverse() {
 	head = prev;
 }
 
+// using selection sort
+void sort() {
+	int tmp;
+	node *min;
+	node *ptr1 = head;
+	node *ptr2 = NULL;
+
+	while (ptr1->next != NULL) {
+		ptr2 = ptr1->next;
+		min = ptr1;
+		while (ptr2 != NULL) {
+			if (ptr2->data < min->data) {
+				min = ptr2;
+			}
+			ptr2 = ptr2->next;
+		}
+		tmp = ptr1->data;
+		ptr1->data = min->data;
+		min->data = tmp;
+
+		ptr1 = ptr1->next;
+	}
+}
+
 void display() {
     if (head == NULL) {
         printf("empty linked list\n");
         return;
     }
     node *ptr = head;
+	printf("[");
     while (ptr != NULL) {
-        printf("%d, ", ptr->data);
+        printf("%d", ptr->data);
+		if (ptr->next != NULL) {
+			printf(", ");
+		}
         ptr = ptr->next;
     }
+	printf("]");
     printf("\n");
 }

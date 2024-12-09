@@ -113,18 +113,17 @@ void insertafter(int value) {
         printf("empty linked list\n");
     } else {
         node *ptr = head;
-        while (ptr->next != NULL) {
+        while (ptr != NULL) {
             if (ptr->data == value) {
+				node *new = createnode();
+				new->next = ptr->next;
+				ptr->next = new;
                 break;
             }
             ptr = ptr->next;
         }
-        if (ptr->next == NULL && ptr->data != value) {
+        if (ptr == NULL) {
             printf("not found\n");
-        } else {
-			node *new = createnode();
-            new->next = ptr->next;
-            ptr->next = new;
         }
     }
 }
@@ -179,6 +178,10 @@ void delete(int item) {
 }
 
 void reverse() {
+	if (head == NULL) {
+		printf("empty list\n");
+		return;
+	}
 	node *prev = NULL;
 	node *current = head;
 	node *next = NULL;
@@ -193,6 +196,10 @@ void reverse() {
 
 // using selection sort
 void sort() {
+	if (head == NULL) {
+		printf("empty list\n");
+		return;
+	}
 	int tmp;
 	node *min;
 	node *ptr1 = head;

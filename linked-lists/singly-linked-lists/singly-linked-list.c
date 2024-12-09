@@ -141,6 +141,9 @@ void deletefront() {
 void deleteend() {
     if (head == NULL) {
         printf("list is empty\n");
+    } else if (head->next == NULL) {
+    	free(head);
+		head = NULL;
     } else {
         node *ptr = head;
         node *prev = NULL;

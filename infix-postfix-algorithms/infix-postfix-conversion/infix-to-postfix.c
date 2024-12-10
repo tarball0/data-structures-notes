@@ -60,7 +60,7 @@ int precedenceof(char c) {
     }
 }
 
-void convert(char input[32]) {
+void convert(char input[]) {
     int i = 0;
     char c;
     while (input[i] != '\0') {
